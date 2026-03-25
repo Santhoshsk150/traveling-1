@@ -1,0 +1,100 @@
+/* Merged Dark Styling for Tanspot + Parallax / Motion Path */
+@keyframes rotateText {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.rotate-slow { animation: rotateText 15s linear infinite; }
+
+.hero-background {
+  background-color: #030305;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(600px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+  animation: gridMove 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes gridMove {
+  0% { transform: perspective(600px) rotateX(60deg) translateY(0) translateZ(-200px); }
+  100% { transform: perspective(600px) rotateX(60deg) translateY(50px) translateZ(-200px); }
+}
+
+/* Motion Path Animation */
+.tracking-line {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  z-index: 1;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.route-path {
+  stroke: #00f0ff;
+  stroke-width: 2px;
+  stroke-dasharray: 6 12;
+  animation: marchingAnts 20s linear infinite;
+}
+
+@keyframes marchingAnts {
+  to { stroke-dashoffset: -100; }
+}
+
+.tracking-dot {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #fcfcfc;
+  border-radius: 50%;
+  box-shadow: 0 0 25px 8px #00f0ff;
+  z-index: 2;
+  offset-path: path('M -100 200 C 200 50, 600 350, 900 200');
+  animation: traceRoute 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes traceRoute {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; transform: scale(1); }
+  50% { transform: scale(1.5); }
+  90% { opacity: 1; transform: scale(1); }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.glow-orb {
+  position: absolute;
+  top: 50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(217,22,22,0.1) 0%, rgba(3,3,5,0) 70%);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Base resets handled by Tailwind, custom scroll */
+.progress-fill {
+    width: 0%;
+    transition: width 2.5s cubic-bezier(0.1, 0.5, 0.5, 1);
+}
+
+.typed-cursor { color: #d91616; font-size: 0.9em; animation: flash 1s infinite; }
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
